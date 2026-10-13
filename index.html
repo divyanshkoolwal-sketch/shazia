@@ -49,6 +49,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
 .w-t{position:absolute;left:0;right:0;bottom:calc(50% - var(--dy0) + var(--ht));text-align:center}
 .w-t .tag{transform:none}
 .w-t .mv{transform:translate3d(0,calc(var(--pw) * -20vh),0);opacity:calc(1 - var(--pw) * 1.15);filter:blur(calc(var(--pw) * 5px))}
+.mv{will-change:transform,opacity}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .w-l .mv{transform:translate3d(calc(var(--pw) * -34vw),0,0);opacity:calc(1 - var(--pw) * 1.15);filter:blur(calc(var(--pw) * 5px))}
 .w-r .mv{transform:translate3d(calc(var(--pw) * 34vw),0,0);opacity:calc(1 - var(--pw) * 1.15);filter:blur(calc(var(--pw) * 5px))}
@@ -58,7 +59,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
 .intro-r{animation:rise 1.9s cubic-bezier(.16,1,.3,1) .6s both}
 @keyframes rise{from{opacity:0;transform:translateY(34px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
 
-.rig{position:absolute;left:50%;top:50%;width:var(--W);aspect-ratio:1600/956;z-index:4;
+.rig{position:absolute;left:50%;top:50%;width:var(--W);aspect-ratio:1600/956;z-index:4;will-change:transform;
   transform:translate(-50%,-50%) translateY(calc((1 - var(--pr)) * var(--dy0) + var(--pr) * var(--dy1))) scale(calc(var(--s0) + (1 - var(--s0)) * var(--pr))) rotate(calc((1 - var(--pr)) * -2.5deg))}
 .rig-in{position:absolute;inset:0;animation:reveal 2.4s cubic-bezier(.16,1,.3,1) .1s both}
 @keyframes reveal{from{opacity:0;transform:translateY(2%) scale(1.02)}to{opacity:1;transform:none}}
@@ -70,7 +71,8 @@ a{color:#ece6da}a:hover{color:#ffffff}
 .l1{stroke-dashoffset:calc(1 - var(--a1))}.l2{stroke-dashoffset:calc(1 - var(--a2))}.l3{stroke-dashoffset:calc(1 - var(--a3))}
 .dot{fill:var(--accent)}
 .d1{opacity:var(--a1)}.d2{opacity:var(--a2)}.d3{opacity:var(--a3)}
-.ring{fill:none;stroke:var(--accent);stroke-width:1px;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:ping 2.8s cubic-bezier(.2,.6,.3,1) infinite}
+.pg{position:absolute;width:0;height:0;z-index:5;pointer-events:none}
+.ping{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;border:1px solid var(--accent);box-sizing:border-box;animation:ping 2.8s cubic-bezier(.2,.6,.3,1) infinite;will-change:transform,opacity}
 @keyframes ping{0%{transform:scale(.6);opacity:.9}100%{transform:scale(3.2);opacity:0}}
 
 .ann{position:absolute;width:210px;z-index:6;margin-top:12px}
@@ -90,8 +92,10 @@ a{color:#ece6da}a:hover{color:#ffffff}
 
 /* ---------- sensor section ---------- */
 .s-stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#070605}
-.s-panel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 6vw 0 max(250px,18vw);pointer-events:none}
+.s-panel{position:absolute;inset:0;will-change:opacity,transform;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 6vw 0 max(250px,18vw);pointer-events:none}
 .s-panel.center{padding:0 24px;text-align:center}
+.hide{visibility:hidden}
+.off .ping,.off .cue,.off .pulse{animation-play-state:paused}
 .v0{opacity:var(--v0);transform:translateY(calc((1 - var(--v0)) * -24px))}
 .v1{opacity:var(--v1);transform:translateY(calc((1 - var(--v1)) * 28px))}
 .v2{opacity:var(--v2);transform:translateY(calc((1 - var(--v2)) * 28px))}
@@ -205,7 +209,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
 /* ---------- atmosphere ---------- */
 .brand{position:fixed;top:30px;left:38px;z-index:45;font-family:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;font-weight:400;font-size:22px;line-height:1;letter-spacing:.05em;color:rgba(236,230,218,.8);pointer-events:none}
 .vig{position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:41;opacity:.085;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:41;opacity:.07;background:url(img/grain.png) repeat;background-size:128px 128px;animation:grain 1s steps(6) infinite;will-change:transform}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
 /* ---------- booking ---------- */
@@ -239,6 +243,8 @@ a{color:#ece6da}a:hover{color:#ffffff}
   .mob{display:grid;position:absolute;left:20px;right:20px;bottom:13vh;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;z-index:6;opacity:var(--a2);transform:translateY(calc((1 - var(--a2)) * 10px))}
   .mob .t{font-size:16px;margin:6px 0 4px}.mob .b{font-size:11.5px;line-height:1.45}
   .brand{top:20px;left:20px;font-size:19px}
+  .grain{display:none}
+  .w-t .mv,.w-l .mv,.w-r .mv{filter:none}
   .note{left:20px;right:20px;bottom:20px;max-width:none;font-size:10.5px}
 
   .s-panel{padding:118px 24px 32px;align-items:flex-start}
@@ -270,7 +276,8 @@ a{color:#ece6da}a:hover{color:#ffffff}
   .ess .t{font-size:21px;margin-bottom:6px}
   .fine{margin-top:30px}
 }
-@media (prefers-reduced-motion:reduce){.grain,.ring,.cue,.st-mark .pulse{animation:none}.intro-l,.intro-r,.rig-in{animation:none}}
+@media (pointer:coarse){.grain{display:none}}
+@media (prefers-reduced-motion:reduce){.grain,.ping,.cue,.st-mark .pulse{animation:none}.intro-l,.intro-r,.rig-in{animation:none}}
 </style>
 </head>
 <body>
@@ -296,10 +303,10 @@ a{color:#ece6da}a:hover{color:#ffffff}
             <circle class="dot d1" cx="40" cy="16.7" r=".42"></circle>
             <circle class="dot d2" cx="10" cy="38.5" r=".42"></circle>
             <circle class="dot d3" cx="51.5" cy="46.6" r=".42"></circle>
-            <g class="d1"><circle class="ring" cx="40" cy="16.7" r=".6"></circle></g>
-            <g class="d2"><circle class="ring" cx="10" cy="38.5" r=".6"></circle></g>
-            <g class="d3"><circle class="ring" cx="51.5" cy="46.6" r=".6"></circle></g>
           </svg>
+          <span class="pg d1" style="left:40%;top:27.95%" aria-hidden="true"><i class="ping"></i></span>
+          <span class="pg d2" style="left:10%;top:64.44%" aria-hidden="true"><i class="ping"></i></span>
+          <span class="pg d3" style="left:51.5%;top:77.99%" aria-hidden="true"><i class="ping"></i></span>
 
           <div class="ann lft n1">
             <div class="k"><b>01</b>The stones</div>
@@ -588,7 +595,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
 
   <div class="brand" translate="no">sházia</div>
   <div class="vig" aria-hidden="true"></div>
-  <svg class="grain" aria-hidden="true"><filter id="gN"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" style="filter: url(#gN)"></rect></svg>
+  <div class="grain" aria-hidden="true"></div>
 </div>
 
 <script>
@@ -601,6 +608,10 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   var root = document.getElementById('root');
   var pin = document.getElementById('pin');
   var sense = document.getElementById('sense');
+  var stage = pin.querySelector('.stage');
+  var sstage = sense.querySelector('.s-stage');
+  var panels = [];
+  for (var n = 0; n < 7; n++) panels.push(sense.querySelector('.v' + n));
 
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function seg(p, a, b) { return clamp01((p - a) / (b - a)); }
@@ -616,54 +627,78 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ease = reduce ? 1 : 0.09;
   var cur = 0, curS = 0, last = {};
-  function set(k, v) { if (last[k] !== v) { root.style.setProperty(k, v); last[k] = v; } }
+  // Each variable lives on the section that uses it, so a change restyles only that subtree.
+  function set(el, k, v) { if (last[k] !== v) { el.style.setProperty(k, v); last[k] = v; } }
   function settle(c, t) { c += (t - c) * ease; return Math.abs(t - c) < 0.0004 ? t : c; }
 
+  // The loop only runs while there is input or easing left to do; idle pages do no work.
+  var running = false, dirty = true;
+  function kick() { dirty = true; if (!running) { running = true; requestAnimationFrame(tick); } }
+
   function tick() {
+    // Reads first, writes after: no forced layout in the middle of a frame.
     var vh = window.innerHeight || 900;
     var vw = root.clientWidth || window.innerWidth || 1440;
+    var tp = progress(pin, vh), ts = progress(sense, vh);
+    dirty = false;
+    cur = settle(cur, tp);
+    curS = settle(curS, ts);
     var mobile = vw < 760;
 
     // Hero: words part, bracelet grows, notes draw in.
-    cur = settle(cur, progress(pin, vh));
     var p = cur;
     var W = mobile ? vw * 0.94 : Math.min(vw * 0.6, vh * 1.0);
     var heroW = mobile ? vw * 0.5 : Math.min(vh * 0.44, vw * 0.3);
-    set('--W', W.toFixed(1) + 'px');
-    set('--sw', (100 / W).toFixed(4));
-    set('--s0', (heroW / W).toFixed(4));
+    set(pin, '--W', W.toFixed(1) + 'px');
+    set(pin, '--sw', (100 / W).toFixed(4));
+    set(pin, '--s0', (heroW / W).toFixed(4));
     // Keep the hero words clear of the bracelet: the visible band is ~84% of the image width.
     var gap = mobile ? 12 : 26, edge = mobile ? 16 : 40;
     var hg = heroW * 0.44 + gap;
-    set('--hg', hg.toFixed(1) + 'px');
-    set('--ht', (heroW * 0.23 + (mobile ? 12 : 20)).toFixed(1) + 'px');
+    set(pin, '--hg', hg.toFixed(1) + 'px');
+    set(pin, '--ht', (heroW * 0.23 + (mobile ? 12 : 20)).toFixed(1) + 'px');
     // real-font widths: top line = 10.42em, "classy." = 2.70em
-    set('--tagfs', Math.min(96, vw * (mobile ? 0.09 : 0.056), (vw - 2 * edge) / 10.42, (vw / 2 - hg - edge) / 2.70).toFixed(1) + 'px');
-    set('--dy1', mobile ? '-6vh' : '0vh');
-    set('--pw', inQuad(seg(p, 0.012, 0.15)).toFixed(4));
-    set('--pr', inOut(seg(p, 0.14, 0.52)).toFixed(4));
+    set(pin, '--tagfs', Math.min(96, vw * (mobile ? 0.09 : 0.056), (vw - 2 * edge) / 10.42, (vw / 2 - hg - edge) / 2.70).toFixed(1) + 'px');
+    set(pin, '--dy1', mobile ? '-6vh' : '0vh');
+    set(pin, '--pw', inQuad(seg(p, 0.012, 0.15)).toFixed(4));
+    set(pin, '--pr', inOut(seg(p, 0.14, 0.52)).toFixed(4));
     for (var i = 0; i < 3; i++) {
-      set('--a' + (i + 1), outQuart(seg(p, 0.58 + i * 0.05, 0.68 + i * 0.05)).toFixed(4));
+      set(pin, '--a' + (i + 1), outQuart(seg(p, 0.58 + i * 0.05, 0.68 + i * 0.05)).toFixed(4));
     }
-
     // Footnote: fades in once the product and its notes are fully shown.
-    set('--an', outQuart(seg(p, 0.80, 0.90)).toFixed(4));
+    set(pin, '--an', outQuart(seg(p, 0.80, 0.90)).toFixed(4));
 
     // Sensor story: intro, five chapters, essentials. One at a time.
-    curS = settle(curS, progress(sense, vh));
     var q = curS, S = 7, w = 1 / S, f = w * 0.28;
     for (var k = 0; k < S; k++) {
       var a = k * w, b = (k + 1) * w;
       var vin = k === 0 ? 1 : seg(q, a, a + f);
       var vout = k === S - 1 ? 1 : 1 - seg(q, b - f, b);
-      set('--v' + k, Math.min(vin, vout).toFixed(4));
-      if (k >= 1 && k <= 5) set('--d' + k, inOut(seg(q, a + f * 0.6, b - f * 1.1)).toFixed(4));
+      var v = Math.min(vin, vout);
+      set(sense, '--v' + k, v.toFixed(4));
+      // Fully faded panels are taken out of painting entirely.
+      var hid = v < 0.001;
+      if (panels[k] && panels[k].__hid !== hid) { panels[k].__hid = hid; panels[k].classList.toggle('hide', hid); }
+      if (k >= 1 && k <= 5) set(sense, '--d' + k, inOut(seg(q, a + f * 0.6, b - f * 1.1)).toFixed(4));
     }
-    set('--vi', Math.min(seg(q, w, w + f), 1 - seg(q, 6 * w - f, 6 * w)).toFixed(4));
+    set(sense, '--vi', Math.min(seg(q, w, w + f), 1 - seg(q, 6 * w - f, 6 * w)).toFixed(4));
 
-    requestAnimationFrame(tick);
+    if (dirty || cur !== tp || curS !== ts) requestAnimationFrame(tick); else running = false;
   }
-  requestAnimationFrame(tick);
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', kick);
+  window.addEventListener('orientationchange', kick);
+  window.addEventListener('load', kick);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(kick);
+  kick();
+
+  // Looping animations pause while their stage is off screen.
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var j = 0; j < entries.length; j++) entries[j].target.classList.toggle('off', !entries[j].isIntersecting);
+    });
+    io.observe(stage); io.observe(sstage);
+  }
 
   // Fitting request form.
   var form = document.getElementById('fitting');
