@@ -36,7 +36,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
 
 #root{width:100%;position:relative;overflow-x:clip;background:#070605;color:#ece6da;
   --accent:#5fd6a4;--pw:0;--pr:0;--a1:0;--a2:0;--a3:0;--s0:.26;--W:60vw;--dy0:6vh;--dy1:0vh;--sw:.12;--hg:22vh;--ht:12vh;--tagfs:clamp(30px,5vw,96px);
-  --v0:1;--v1:0;--v2:0;--v3:0;--v4:0;--v5:0;--v6:0;--vi:0;--d1:0;--d2:0;--d3:0;--d4:0;--d5:0;--an:0}
+  --v0:1;--v1:0;--v2:0;--v3:0;--v4:0;--v5:0;--v6:0;--vi:0;--d1:0;--d2:0;--d3:0;--d4:0;--d5:0;--an:0;--h0:1}
 #pin{position:relative;height:520vh}
 #sense{position:relative;height:760vh}
 
@@ -108,6 +108,20 @@ a{color:#ece6da}a:hover{color:#ffffff}
 .s-b{font-size:15px;line-height:1.62;font-weight:300;color:rgba(236,230,218,.72);margin:0;max-width:340px}
 .s-big{font-family:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;font-weight:400;font-size:clamp(44px,5.6vw,104px);line-height:.98;letter-spacing:-.014em;margin:22px 0 26px}
 .s-big em{font-style:italic}
+/* intro headline: short line, gold "bracelet", punchline as a drawn callout */
+.hl-1,.hl-2{display:block}
+.anc{position:relative;display:inline-block}
+.au{background:linear-gradient(100deg,#a97a33 0%,#d9b061 26%,#f8e7b6 44%,#e2bb69 58%,#b0823a 78%,#d6ad5f 100%);background-size:260% 100%;
+  background-position:calc(100% - var(--h0) * 100%) 0;-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+.call{position:absolute;left:calc(100% + .1em);top:.72em;width:0;height:0;pointer-events:none;text-align:left}
+.call-d,.call-h{position:absolute;height:1px;background:rgba(236,230,218,.62);transform-origin:0 0}
+.call-d{left:0;top:0;width:.623em;transform:rotate(47.6deg) scaleX(min(1,calc(var(--h0) * 2)))}
+.call-h{left:.42em;top:.46em;width:.83em;transform:scaleX(clamp(0,calc(var(--h0) * 2 - 1),1))}
+.call-dot{position:absolute;left:-3.5px;top:-3.5px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:min(1,calc(var(--h0) * 5))}
+.call-v{display:none}
+.call-tw{position:absolute;left:1.36em;top:.46em;transform:translateY(-50%)}
+.call-t{display:block;white-space:nowrap;font-style:italic;font-size:max(15px,.3em);line-height:1.12;letter-spacing:0;color:rgba(236,230,218,.92);
+  opacity:clamp(0,calc((var(--h0) - .55) * 2.4),1);transform:translateX(calc((1 - var(--h0)) * 10px))}
 .intro{display:flex;flex-direction:column;align-items:center}
 .intro .s-b{max-width:440px}
 .cue{display:block;width:1px;height:64px;margin-top:44px;background:linear-gradient(to bottom,var(--accent),transparent);animation:cue 2.4s cubic-bezier(.4,0,.2,1) infinite;transform-origin:top}
@@ -208,13 +222,9 @@ a{color:#ece6da}a:hover{color:#ffffff}
 
 /* ---------- atmosphere ---------- */
 .brand{position:fixed;top:30px;left:38px;z-index:45;font-family:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;font-weight:400;font-size:22px;line-height:1;letter-spacing:.05em;color:rgba(236,230,218,.8);pointer-events:none}
-.vig{position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:41;opacity:.07;background:url(img/grain.png) repeat;background-size:128px 128px;animation:grain 1s steps(6) infinite;will-change:transform}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
 /* ---------- booking ---------- */
-.book{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14vh 24px;box-sizing:border-box;position:relative;
-  background:radial-gradient(90vh 50vh at 50% 100%,color-mix(in oklab,var(--accent) 10%,transparent),transparent 70%)}
+.book{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:14vh 24px;box-sizing:border-box;position:relative}
 .book form{width:100%;max-width:480px;display:flex;flex-direction:column;gap:30px;position:relative;z-index:2}
 .book-hd{margin-bottom:6px}
 .book-hd .s-h{margin:14px 0 12px}
@@ -243,7 +253,6 @@ a{color:#ece6da}a:hover{color:#ffffff}
   .mob{display:grid;position:absolute;left:20px;right:20px;bottom:13vh;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;z-index:6;opacity:var(--a2);transform:translateY(calc((1 - var(--a2)) * 10px))}
   .mob .t{font-size:16px;margin:6px 0 4px}.mob .b{font-size:11.5px;line-height:1.45}
   .brand{top:20px;left:20px;font-size:19px}
-  .grain{display:none}
   .w-t .mv,.w-l .mv,.w-r .mv{filter:none}
   .note{left:20px;right:20px;bottom:20px;max-width:none;font-size:10.5px}
 
@@ -253,8 +262,15 @@ a{color:#ece6da}a:hover{color:#ffffff}
   .s-h{font-size:34px;margin:12px 0 12px}
   .s-b{font-size:14px}
   .s-big{font-size:clamp(40px,11.5vw,58px)}
-  .s-big.s-long{font-size:clamp(34px,9.6vw,46px);text-wrap:balance}
-  .s-long .nw{white-space:nowrap}
+  .s-big.hl{font-size:clamp(34px,9.6vw,46px);margin-bottom:22px}
+  .anc{position:static;display:inline}
+  .call{position:static;display:flex;flex-direction:column;align-items:center;width:auto;height:auto;margin-top:.34em;text-align:center}
+  .call-d,.call-h{display:none}
+  .call-dot{position:static;display:block}
+  .call-v{display:block;width:1px;height:.62em;margin:6px 0 10px;background:rgba(236,230,218,.5);transform:scaleY(var(--h0));transform-origin:top}
+  .call-tw{position:static;transform:none}
+  .call-t{font-size:20px;transform:translateY(calc((1 - var(--h0)) * 8px))}
+  .call-t .dk{display:none}
   .s-idx{left:24px;right:24px;top:70px;transform:none;flex-direction:row;gap:6px}
   .s-idx li{flex:1;gap:0}
   .s-idx .lbl{display:none}
@@ -278,8 +294,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
   .ess .t{font-size:21px;margin-bottom:6px}
   .fine{margin-top:30px}
 }
-@media (pointer:coarse){.grain{display:none}}
-@media (prefers-reduced-motion:reduce){.grain,.ping,.cue,.st-mark .pulse{animation:none}.intro-l,.intro-r,.rig-in{animation:none}}
+@media (prefers-reduced-motion:reduce){.ping,.cue,.st-mark .pulse{animation:none}.intro-l,.intro-r,.rig-in{animation:none}}
 </style>
 </head>
 <body>
@@ -352,7 +367,7 @@ a{color:#ece6da}a:hover{color:#ffffff}
       <div class="s-panel center v0">
         <div class="intro">
           <p class="k">What it tracks</p>
-          <h2 class="s-big s-long">Your whole health in one bracelet<br><em>that actually <span class="nw">looks like one.</span></em></h2>
+          <h2 class="s-big hl"><span class="hl-1">Your whole health</span> <span class="hl-2">in one <span class="anc"><em class="au">bracelet</em><span class="call"><i class="call-d" aria-hidden="true"></i><i class="call-h" aria-hidden="true"></i><i class="call-dot" aria-hidden="true"></i><i class="call-v" aria-hidden="true"></i><span class="call-tw"><span class="call-t"> that actually<br class="dk"> looks like one.</span></span></span></span></span></h2>
           <p class="s-b">The sensor reads your skin temperature and heart rate. The app turns that into five things you can use.</p>
           <span class="cue" aria-hidden="true"></span>
         </div>
@@ -596,8 +611,6 @@ a{color:#ece6da}a:hover{color:#ffffff}
   </footer>
 
   <div class="brand" translate="no">sházia</div>
-  <div class="vig" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
 </div>
 
 <script>
@@ -628,7 +641,7 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ease = reduce ? 1 : 0.09;
-  var cur = 0, curS = 0, last = {};
+  var cur = 0, curS = 0, curE = 0, last = {};
   // Each variable lives on the section that uses it, so a change restyles only that subtree.
   function set(el, k, v) { if (last[k] !== v) { el.style.setProperty(k, v); last[k] = v; } }
   function settle(c, t) { c += (t - c) * ease; return Math.abs(t - c) < 0.0004 ? t : c; }
@@ -642,9 +655,12 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
     var vh = window.innerHeight || 900;
     var vw = root.clientWidth || window.innerWidth || 1440;
     var tp = progress(pin, vh), ts = progress(sense, vh);
+    // Intro headline draws in while the section slides up into view.
+    var te = clamp01(1 - sense.getBoundingClientRect().top / vh);
     dirty = false;
     cur = settle(cur, tp);
     curS = settle(curS, ts);
+    curE = settle(curE, te);
     var mobile = vw < 760;
 
     // Hero: words part, bracelet grows, notes draw in.
@@ -683,9 +699,10 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
       if (panels[k] && panels[k].__hid !== hid) { panels[k].__hid = hid; panels[k].classList.toggle('hide', hid); }
       if (k >= 1 && k <= 5) set(sense, '--d' + k, inOut(seg(q, a + f * 0.6, b - f * 1.1)).toFixed(4));
     }
+    set(sense, '--h0', (reduce ? 1 : outQuart(seg(curE, 0.42, 0.96))).toFixed(4));
     set(sense, '--vi', Math.min(seg(q, w, w + f), 1 - seg(q, 6 * w - f, 6 * w)).toFixed(4));
 
-    if (dirty || cur !== tp || curS !== ts) requestAnimationFrame(tick); else running = false;
+    if (dirty || cur !== tp || curS !== ts || curE !== te) requestAnimationFrame(tick); else running = false;
   }
   window.addEventListener('scroll', kick, { passive: true });
   window.addEventListener('resize', kick);
